@@ -1,39 +1,32 @@
 import styled, { css } from "styled-components";
 
+
+const Primary = css`
+    color: ${props => props.theme.palette.typography.primary};
+    background: ${props => props.theme.palette.core.primary};
+`
+
+const Hover = css`
+    &:hover{
+        background: ${props => props.theme.palette.core.primaryHover};
+    }
+`
+
+
 const Button = styled.a <any>`
+    width: 100%;
+    margin: 1rem 0;
+    cursor: pointer;
     display: inline-block;
-    border-radius: 3px;
     padding: 0.5rem 0;
-    margin: 0.5rem 1rem;
-
-    top: 588px;
-    left: 800px;
-    width: 321px;
-    height: 38px;
-
-    border-radius: 5px;
-    opacity: 1;
-
-    background: transparent;
-    color: white;
-    border: 2px solid white;
-    
-    font-size:17px;
+    color: ${props => props.theme.palette.typography.primary};
+    background: ${props => props.theme.palette.core.baseBackground};
+    transition: ${props => props.theme.animation.primary};
+    border-radius: ${props => props.theme.border.radius['5']};
     text-align: center;
-    font: normal normal normal 16px/18px Helvetica Neue;
-    letter-spacing: 0px;
-    color: #FFFFFF;
-    opacity: 1;
-
-    ${(props) => props.primary && css`
-    background: #E31A13;
-    color: #FFFFFF;
-    `}
-
-    ${(props) => props.secondary && css`
-    background: #2A2A2A;
-    color:  #FFFFFF;
-    `}    
+    
+    ${props => props.primary && Primary} 
+    ${Hover}
 
 `
 
