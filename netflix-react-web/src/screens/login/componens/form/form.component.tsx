@@ -4,12 +4,16 @@ import React, {useState, useCallback} from 'react';
 import InputText from "../../../../components/inputs/input-text/input-text.component";
 import Button from "../../../../components/buttons/button/button.component";
 import { ErrorDescription } from './form.styled';
+import { useDispatch } from 'react-redux';
+import { userActions } from '../../../../store/user/user.slice';
 
 const errorInitial = ''
 
 export default function Form() {
     const [data, setData] = useState({email: '', password: ''})
     const [error, setError] = useState(errorInitial)
+
+    const dispatch = useDispatch()
 
     const resetError = useCallback(
         () => setError(errorInitial),[]
@@ -48,10 +52,12 @@ export default function Form() {
     const onSubmit = useCallback(
        
         async () => {
-            console.log('onSubmit')
-            await validation()
+            
+            if ( await validation() ){
+                dispatch(userActions.login(data))
+            }
         },
-        [validation]
+        [validation, data]
     )
 
     return (
