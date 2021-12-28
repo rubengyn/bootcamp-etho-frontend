@@ -3,7 +3,7 @@ import { Container, Grid } from '@mui/material';
 import InputText from "../../components/inputs/input-text/input-text.component";
 import login from '../../assets/icons/logo.svg';
 import { Logo, Wrapper } from './login.styled';
-
+import Form from './componens/form/form.component'
 
 export default function Login() {
 	return (
@@ -13,9 +13,7 @@ export default function Login() {
 					<Grid item xs={3} justifyContent={'center'}>
 						<Grid item justifyContent={'center'}>
 							<Logo src={login} alt={'Netflix logo'}/>
-								<InputText type={'text'} placeholder="E-mail" />
-								<InputText type={'password'} placeholder="Senha" />
-								<Button href="\" primary={true}>Entrar</Button>
+							<Form />
 						</Grid>
 					</Grid>
 				</Wrapper>
