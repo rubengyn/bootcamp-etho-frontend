@@ -7,6 +7,9 @@ import { GlobalStyle } from './themes/main/global-style';
 import theme from "./themes/main/theme"
 import {Provider} from 'react-redux';
 import store from './store/store/store';
+import { HomePath } from './screens/home/home.types'
+import UserGuard from './components/rotes/user-guard/user-guard.component';
+import Home from './screens/home/home.screen';
 
 function App() {
   return (
@@ -15,6 +18,8 @@ function App() {
       <GlobalStyle />
       <Routes>
         <Route path={LoginPath} element={<Login />} />
+        <Route path={HomePath} element={<UserGuard><Home/></UserGuard>} />
+
       </Routes>
     </ThemeProvider>
     </Provider>
