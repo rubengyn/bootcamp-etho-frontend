@@ -12,4 +12,4 @@ const userSlice = createSlice({
     reducers ,
 })
 
-export const {reducer: userRducer, actions: userActions} = userSlice
+export const {reducer: userReducer, actions: userActions} = userSlice
