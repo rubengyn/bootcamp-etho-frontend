@@ -6,10 +6,10 @@ import { ErrorMessage } from "./form.types";
 import { ErrorDescription } from './form.styled';
 import { userActions } from '../../../../store/user/user.slice';
 import { useDispatch, useSelector } from 'react-redux';
-import { isAuthenticated } from '../../../../store/user/user.selector';
+import { isAuthenticated, isLoading } from '../../../../store/user/user.selector';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { HomePath } from '../../../home/home.types';
-
+import { useMemo } from 'react';
 
 
 
@@ -22,6 +22,7 @@ export default function Form() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const location = useLocation()
+    const isUserLoading = useSelector(isLoading)
     const isUserAuthenticated = useSelector(isAuthenticated)
 
     useEffect(
@@ -32,6 +33,11 @@ export default function Form() {
             }
         },
         [isUserAuthenticated]
+    )
+
+    const buttonDescription = useMemo(
+        () => isUserLoading ? 'Carregando...' : 'Entrar',
+        [isUserLoading]
     )
 
     const resetError = useCallback(
@@ -82,7 +88,7 @@ export default function Form() {
             <InputText type={'text'} placeholder="E-mail" name={'email'} onChange={handleChange} />
             <InputText type={'password'} placeholder="Senha" name={'password'} onChange={handleChange} />
             <ErrorDescription>{error}</ErrorDescription>
-            <Button primary={true} onClick={onSubmit}>Entrar</Button>
+            <Button primary onClick={onSubmit}>{buttonDescription}</Button>
         </>
     )
 
