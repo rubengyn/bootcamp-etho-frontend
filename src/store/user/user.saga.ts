@@ -1,9 +1,8 @@
-import {put, takeEvery, all, call} from 'redux-saga/effects'
-import axiosInstance from '../../modules/axios/axios.module'
-import {userActions} from "./user.slice"
-import { AccessTokenStorageKey } from './user.types'
-import { UserAction } from './user.types'
-
+import { put, takeEvery, all, call } from 'redux-saga/effects'
+import {userActions} from "./user.slice";
+import sessionService from "../../services/session/session.service";
+import {AccessTokenStorageKey, UserAction} from "./user.types";
+import {GetSession, PostSessionNew} from "../../services/user/user.types";
 export function* login(props: UserAction){
     try {
         yield put(userActions.setSettings({isLoading: true}))
@@ -26,9 +25,27 @@ function* watchLogin(){
     yield takeEvery('user/Login',login)
 }
 
+
+export function* loginByToken(){
+    try{
+        const accessToken = localStorage.getItem(AccessTokenStorageKey)
+
+        if (accessToken){
+            const { data: { userId: id } }: GetSession = yield call(sessionService().getSession, accessToken)
+
+            yield put(userActions.setData({id}))
+
+        }
+    } catch ( error ){
+        // @ts-ignore
+        yield put(userActions.setError(error.response.data.message))
+    }
+}
+
 export default function* userSaga(){
     yield all([
         watchLogin(),
+        loginByToken(),
     ])
 }
 
