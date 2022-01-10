@@ -9,7 +9,7 @@ import {Provider} from "react-redux";
 import store from "./store/store/store";
 import Home from "./screens/home/home.screen";
 import {HomePath} from "./screens/home/home.types";
-import UserGuard from "./components/rotes/user-guard/user-guard.component";
+import UserGuard from "./components/routers/user-guard/user-guard.component";
 
 function App() {
     return (
