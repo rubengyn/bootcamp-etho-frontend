@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect, useMemo} from 'react';
 import InputText from "../../../../components/inputs/input-text/input-text.component";
 import Button from "../../../../components/buttons/button/button.component";
 import * as yup from 'yup'
@@ -6,11 +6,9 @@ import { ErrorMessage } from "./form.types";
 import { ErrorDescription } from './form.styled';
 import { userActions } from '../../../../store/user/user.slice';
 import { useDispatch, useSelector } from 'react-redux';
-import { isAuthenticated, isLoading } from '../../../../store/user/user.selector';
+import { isAuthenticated, isLoading } from '../../../../store/user/user.selectors';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { HomePath } from '../../../home/home.types';
-import { useMemo } from 'react';
-
 
 
 const errorInitial = ''
@@ -85,8 +83,8 @@ export default function Form() {
 
     return (
         <>
-            <InputText type={'text'} placeholder="E-mail" name={'email'} onChange={handleChange} />
-            <InputText type={'password'} placeholder="Senha" name={'password'} onChange={handleChange} />
+            <InputText type={'text'} placeholder={"E-mail"} name={'email'} onChange={handleChange} />
+            <InputText type={'password'} placeholder={"Senha"} name={'password'} onChange={handleChange} />
             <ErrorDescription>{error}</ErrorDescription>
             <Button primary onClick={onSubmit}>{buttonDescription}</Button>
         </>

@@ -20,7 +20,7 @@ const Button = styled.a <any>`
     padding: 0.5rem 0;
     color: ${props => props.theme.palette.typography.primary};
     background: ${props => props.theme.palette.core.baseBackground};
-    transition: ${props => props.theme.animation.primary};
+    transition: background ${props => props.theme.animation.primary};
     border-radius: ${props => props.theme.border.radius['5']};
     text-align: center;
     
